@@ -1,20 +1,24 @@
 version: 0.2
+
 phases:
   install:
+    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
+    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
     runtime-versions:
-      nodejs: 18
+      nodejs: 16
+  pre_build:
     commands:
-      - echo "Installing dependencies using node 18"
+      - echo Installing source NPM dependencies...
       - npm install
-      - echo "Done installing dependencies ====>"
   build:
     commands:
-      - echo "Building the React Project"
+      - echo Build started on 'date'
       - npm run build
-      - echo "Done building the project ==> Exporting artifcats"
+  post_build:
+    commands:
+      - aws s3 cp --recursive --acl public-read ./build s3://reactapphostawsmasterchef-bucket/
+
 artifacts:
   files:
-    - 'build/**/*'
-  base-directory: 'build'
-  discard-paths: No
-
+    - "build/*"
+    - "build/**/*"
