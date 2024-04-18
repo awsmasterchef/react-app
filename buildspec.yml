@@ -1,5 +1,4 @@
 version: 0.2
-
 phases:
   install:
     #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
