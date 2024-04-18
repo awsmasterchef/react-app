@@ -5,7 +5,7 @@ phases:
       nodejs: 18
     commands:
       - echo "Installing dependencies using node 18"
-      - npm ci 
+      - npm install
       - echo "Done installing dependencies ====>"
   build:
     commands:
