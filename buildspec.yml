@@ -14,8 +14,3 @@ phases:
       - npm run build
       - echo "Done building the project ==> Exporting artifcats"
 
-artifacts:
-  files:
-    - '**/*'
-  discard-paths: no
-  base-directory: dist
