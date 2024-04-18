@@ -13,4 +13,8 @@ phases:
       - echo "Building the React Project"
       - npm run build
       - echo "Done building the project ==> Exporting artifcats"
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
 
