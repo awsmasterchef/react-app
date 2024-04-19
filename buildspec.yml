@@ -13,11 +13,9 @@ phases:
     commands:
       - echo Build started on 'date'
       - npm run build
-  post_build:
-    commands:
-      - aws s3 cp --recursive --acl public-read ./build s3://reactapphostawsmasterchef-bucket/
-
+      
 artifacts:
   files:
-    - "build/*"
-    - "build/**/*"
+    - "**/*
+  discard=path: no
+  base-directory: build
