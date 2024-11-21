@@ -1,15 +1,11 @@
 pipeline {
     agent any
-    triggers {
-        githubPush()
-      }
- 
+    
     tools {
        nodejs 'nodejs'
     }   
  
     environment {
-        GITLAB_TOKEN = credentials('FRONTEND_REPO_GITLAB_TOKEN') 
         AWS_REGION = 'ap-south-1'
         BUCKET_NAME = 'pipeline-test-bucket-iot'
     }
@@ -20,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo "BRANCH_NAME is: ${env.BRANCH_NAME}"            
-            git url: "https://abhishekbhatia:${GITLAB_TOKEN}@git.nagarro.com/NAGCOEIOT/iotplatform-v2/platform-tenant-fe.git",
+            git url: "https://github.com/awsmasterchef/react-app.git",
                 branch: "${env.BRANCH_NAME}" 
         }
             }
@@ -49,7 +45,6 @@ pipeline {
                     aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
                     aws configure set region ${AWS_REGION}
                     aws s3 sync dist/ s3://${BUCKET_NAME} --delete
-                    aws cloudfront create-invalidation --distribution-id E1FR1B4SU1D9O1 --paths "/*"
                     """
                 }
             }
