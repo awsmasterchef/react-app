@@ -7,7 +7,7 @@ pipeline {
  
     environment {
         AWS_REGION = 'ap-south-1'
-        BUCKET_NAME = 'pipeline-test-bucket-iot'
+        BUCKET_NAME = 'mydemoappawsmasterchef'
     }
  
     stages {
@@ -44,7 +44,7 @@ pipeline {
                     aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
                     aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
                     aws configure set region ${AWS_REGION}
-                    aws s3 sync dist/ s3://${BUCKET_NAME} --delete
+                    aws s3 sync build/ s3://${BUCKET_NAME} --delete
                     """
                 }
             }
